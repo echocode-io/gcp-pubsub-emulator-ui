@@ -1,3 +1,7 @@
 micronaut:
   application:
     name: gcpPubsubEmulatorUi
+  io:
+    watch:
+      paths: src/main
+      restart: true

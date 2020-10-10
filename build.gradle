@@ -17,7 +17,7 @@ micronaut {
     testRuntime "spock2"
     processing {
         incremental true
-        annotations "io.echocode.*"
+        annotations "io.echocode.gcppubsubemulatorui.*"
     }
 }
 
@@ -29,14 +29,21 @@ dependencies {
     implementation("io.micronaut.gcp:micronaut-gcp-pubsub")
     implementation("io.micronaut.views:micronaut-views-thymeleaf")
     runtimeOnly("ch.qos.logback:logback-classic")
+
+    // Automatically added with the 'file-watch' feature in the CLi
+    developmentOnly "io.micronaut:micronaut-runtime-osx"
+    developmentOnly "net.java.dev.jna:jna"
+    developmentOnly "io.methvin:directory-watcher"
+
 }
 
-mainClassName = "io.echocode.Application"
+mainClassName = "io.echocode.gcppubsubemulatorui.Application"
 java {
     sourceCompatibility = JavaVersion.toVersion('11')
     targetCompatibility = JavaVersion.toVersion('11')
 }
 
+run.classpath += configurations.developmentOnly
 
 
 

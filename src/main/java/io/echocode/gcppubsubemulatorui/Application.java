@@ -1,4 +1,4 @@
-package io.echocode;
+package io.echocode.gcppubsubemulatorui;
 
 import io.micronaut.runtime.Micronaut;
 
