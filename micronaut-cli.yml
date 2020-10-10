@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: io.echocode
+testFramework: spock
+sourceLanguage: java
+buildTool: gradle
+features: [ annotation-api, app-name, gcp-pubsub, gradle, http-client, java, java-application, logback, netty-server, readme, shade, spock, views-thymeleaf, yaml ]
