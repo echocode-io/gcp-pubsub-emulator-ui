@@ -26,14 +26,24 @@ dependencies {
     implementation("io.micronaut:micronaut-runtime")
     implementation("javax.annotation:javax.annotation-api")
     implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut.gcp:micronaut-gcp-pubsub")
     implementation("io.micronaut.views:micronaut-views-thymeleaf")
     runtimeOnly("ch.qos.logback:logback-classic")
+
+    compileOnly 'org.projectlombok:lombok:1.18.14'
+    annotationProcessor "org.projectlombok:lombok:1.18.14"
+    annotationProcessor "io.micronaut:micronaut-inject-java"
 
     // Automatically added with the 'file-watch' feature in the CLi
     developmentOnly "io.micronaut:micronaut-runtime-osx"
     developmentOnly "net.java.dev.jna:jna"
     developmentOnly "io.methvin:directory-watcher"
+
+    testCompile "org.testcontainers:testcontainers:1.15.0-rc2"
+    testImplementation "org.gebish:geb-spock:3.4"
+    testImplementation "org.seleniumhq.selenium:htmlunit-driver:2.35.1"
+    testRuntime 'net.sourceforge.htmlunit:htmlunit:2.35.0'
+    testImplementation "org.seleniumhq.selenium:selenium-support:3.141.59"
+    testImplementation "org.seleniumhq.selenium:selenium-api:3.141.59"
 
 }
 

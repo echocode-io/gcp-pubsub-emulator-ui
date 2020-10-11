@@ -5,3 +5,10 @@ micronaut:
     watch:
       paths: src/main
       restart: true
+
+gcp:
+  pubsub:
+    emulator:
+      ui:
+        projects: ${GCP_PROJECT_IDS:company-dev,company-staging}
+        emulator-host: http://${EMULATOR_HOST:`localhost:8681`}

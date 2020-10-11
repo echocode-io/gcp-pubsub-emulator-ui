@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <title>Pub/Sub UI</title>
 </head>
 <body>
 <section>
-    <h1 th:if="${loggedIn}">username: <span th:text="${username}"></span></h1>
-    <h1 th:unless="${loggedIn}">You are not logged in</h1>
+    <div class="no-projects" th:if="${projectTopics.empty}">
+        <p>No projects configured</p>
+    </div>
+    <div th:if="${projectTopics != null}">
+        <h2>Topics</h2>
+        <ul>
+            <li class="project" th:each="project : ${projectTopics}">
+                <span th:text="${project.key}"></span>
+                <ul>
+                    <li class="no-topics" th:if="${project.value.empty}">No topics configured</li>
+                    <li class="topic" th:each="topic : ${project.value}" th:text="${topic.name}">Topic Name</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </section>
 </body>
 </html>

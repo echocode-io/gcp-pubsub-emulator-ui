@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+
     <title th:replace="${title}">Layout Title</title>
 </head>
 <body>
-<h1>Layout H1</h1>
+<h1>GCP Pub/Sub Emulator UI</h1>
 <div th:replace="${content}">
     <p>Layout content</p>
 </div>
