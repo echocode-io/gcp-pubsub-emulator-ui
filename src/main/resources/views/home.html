@@ -15,8 +15,8 @@
                 <span th:text="${project.key}"></span>
                 <ul>
                     <li class="no-topics" th:if="${project.value.empty}">No topics configured</li>
-                    <li class="topic" th:each="topic : ${project.value}">
-                        <a th:href="@{'/project/' + ${project.key} + '/topic/' + ${topic.topicNameStripped}}" th:text="${topic.topicNameStripped}">Topic Name</a>
+                    <li th:each="topic : ${project.value}">
+                        <a class="topic" th:href="@{'/project/' + ${project.key} + '/topic/' + ${topic.topicNameStripped}}" th:text="${topic.topicNameStripped}">Topic Name</a>
                     </li>
                 </ul>
             </li>

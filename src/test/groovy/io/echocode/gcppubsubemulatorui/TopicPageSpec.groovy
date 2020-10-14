@@ -1,10 +1,12 @@
 package io.echocode.gcppubsubemulatorui
 
 import io.echocode.gcppubsubemulatorui.page.TopicPage
+import spock.lang.Stepwise
 
+@Stepwise
 class TopicPageSpec extends PubSubSpec {
 
-    void 'publish a message to topic'() {
+    void 'view topic page'() {
         given:
         browser.baseUrl = "http://${embeddedServer.host}:${embeddedServer.port}"
 
@@ -22,5 +24,17 @@ class TopicPageSpec extends PubSubSpec {
         topicPage.topics[0].text() == 'Topic: project1/topic1'
         topicPage.leads[0].text() == 'Publish a message'
         topicPage.publishMessageForm.displayed
+    }
+
+    void 'publish a message to topic'() {
+        given:
+        TopicPage topicPage = browser.page TopicPage
+
+        when:
+        topicPage.publishMessageArea.text = """{"test": "hi"}"""
+        topicPage.publishButton.click()
+
+        then:
+        topicPage.publishMessageArea.text == ""
     }
 }
