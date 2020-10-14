@@ -8,4 +8,8 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Topic {
     String name;
+
+    public String topicNameStripped() {
+        return name.split("/")[3];
+    }
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${project} +'/' + ${topic}"></title>
+</head>
+<body>
+<section>
+    <h3 class="topic" th:text="'Topic: ' + ${project} +'/' + ${topic}">Publish message on</h3>
+    <p class="lead">Publish a message</p>
+    <form class="publish-message-form" action="#" th:action="@{'/project/'+${project}+'/topic/'+${topic}}" th:object="${message}"
+          method="post">
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea required class="form-control" id="message" name="message" rows="15"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <button type="reset" class="btn btn-outline-secondary">Reset</button>
+    </form>
+</section>
+</body>
+</html>

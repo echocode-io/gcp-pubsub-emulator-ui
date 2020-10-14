@@ -11,13 +11,23 @@
     <title th:replace="${title}">Layout Title</title>
 </head>
 <body>
-<h1>GCP Pub/Sub Emulator UI</h1>
-<div th:replace="${content}">
-    <p>Layout content</p>
-</div>
-<footer>
-    Layout footer
-</footer>
+<header class="masthead mb-auto">
+    <div class="navbar navbar-dark bg-primary shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a href="/" class="navbar-brand d-flex align-items-center">
+                <strong>GCP Pub/Sub Emulator UI</strong>
+            </a>
+        </div>
+    </div>
+</header>
+<main role="main" class="inner cover">
+    <div class="container mt-3">
+        <div th:replace="${content}">
+            <p>Layout content</p>
+        </div>
+    </div>
+</main>
+<!--<footer>-->
+<!--</footer>-->
 </body>
 </html>
-
