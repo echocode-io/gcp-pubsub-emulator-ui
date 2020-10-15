@@ -15,7 +15,7 @@ import spock.lang.Shared
 
 @Slf4j
 @MicronautTest
-class PubSubSpec extends GebSpec {
+class PubSubBaseSpec extends GebSpec {
 
     @Shared
     @AutoCleanup

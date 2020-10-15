@@ -4,7 +4,7 @@ import io.echocode.gcppubsubemulatorui.page.TopicPage
 import spock.lang.Stepwise
 
 @Stepwise
-class TopicPageSpec extends PubSubSpec {
+class TopicPageBaseSpec extends PubSubBaseSpec {
 
     void 'view topic page'() {
         given:
