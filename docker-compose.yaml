@@ -1,5 +1,8 @@
+# Use this for local development when cloning/running this project locally
+# If you're looking for a complete example of emulator + ui console, checkout the README.md
 version: "3.8"
 services:
+
   pubsub-emulator:
     image: messagebird/gcloud-pubsub-emulator:latest
     ports:
