@@ -10,7 +10,7 @@ A UI console for the Google Cloud Platform PubSub emulator.
 ## Getting started
 
 ```shell script
-docker run -p 8680:8080 --env EMULATOR_HOST=<emulator-host>:<emulator-port> --env GCP_PROJECT_IDS=<comma-separated-project-ids> gcp-pubsub-emulator-ui:latest
+docker run -p 8680:8080 --env PUBSUB_EMULATOR_HOST=<emulator-host>:<emulator-port> --env GCP_PROJECT_IDS=<comma-separated-project-ids> gcp-pubsub-emulator-ui:latest
 ```
 
 The UI runs on [http://localhost:8680](localhost:8680) by default.
@@ -18,7 +18,7 @@ The UI runs on [http://localhost:8680](localhost:8680) by default.
 ### Running by pointing at local emulator
 
 ```shell script
-docker run -p 8680:8080 --env EMULATOR_HOST=host.docker.internal:8681 --env GCP_PROJECT_IDS=company-dev,company-staging gcp-pubsub-emulator-ui:latest
+docker run -p 8680:8080 --env PUBSUB_EMULATOR_HOST=host.docker.internal:8681 --env GCP_PROJECT_IDS=company-dev,company-staging gcp-pubsub-emulator-ui:latest
 ```
 
 ### Running in an existing docker-compose.yaml
@@ -27,13 +27,13 @@ docker run -p 8680:8080 --env EMULATOR_HOST=host.docker.internal:8681 --env GCP_
 version: "3.8"
 services:
   ...
-  pubsub-emulator:
-    image: messagebird/gcloud-pubsub-emulator:latest
+  pubsub-emulator-ui:
+    image: echocode/gcp-pubsub-emulator-ui:latest
     ports:
-      - "8681:8681"
+      - "8680:8680"
     environment:
-      - PUBSUB_PROJECT1=company-dev,invoices:invoice-calculator,chats:slack-out:irc-out,notifications
-      - PUBSUB_PROJECT2=company-staging,invoices:invoice-calculator
+      - PUBSUB_EMULATOR_HOST=pubsub-emulator:8681
+      - GCP_PROJECT_IDS=company-dev,company-staging
 ```
 
 
@@ -58,7 +58,7 @@ services:
     ports:
       - "8680:8680"
     environment:
-      - EMULATOR_HOST=pubsub-emulator:8681
+      - PUBSUB_EMULATOR_HOST=pubsub-emulator:8681
       - GCP_PROJECT_IDS=company-dev,company-staging
 ```
 

@@ -3,6 +3,7 @@ package io.echocode.gcppubsubemulatorui
 import geb.spock.GebSpec
 import groovy.util.logging.Slf4j
 import io.echocode.gcppubsubemulatorui.container.PubSubEmulatorContainer
+import io.echocode.gcppubsubemulatorui.listener.PubSubTestListener
 import io.micronaut.context.ApplicationContext
 import io.micronaut.core.util.CollectionUtils
 import io.micronaut.runtime.server.EmbeddedServer
@@ -13,9 +14,14 @@ import org.testcontainers.containers.wait.strategy.HostPortWaitStrategy
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 
+import javax.inject.Inject
+
 @Slf4j
 @MicronautTest
 class PubSubBaseSpec extends GebSpec {
+
+    @Inject
+    PubSubTestListener pubSubTestListener
 
     @Shared
     @AutoCleanup
@@ -25,23 +31,30 @@ class PubSubBaseSpec extends GebSpec {
     @AutoCleanup
     ApplicationContext context
 
+    static PUBSUB_CONTAINER_HOST = ""
+
     @Shared
     @AutoCleanup
-    static final GenericContainer<PubSubEmulatorContainer> container = new GenericContainer<PubSubEmulatorContainer>("messagebird/gcloud-pubsub-emulator:latest")
+    public static final GenericContainer<PubSubEmulatorContainer> container = new GenericContainer<PubSubEmulatorContainer>("messagebird/gcloud-pubsub-emulator:latest")
             .withEnv("PUBSUB_PROJECT1", "project1,topic1:subscription1")
             .withExposedPorts(8681);
 
-    void setupSpec() {
+    static {
         container.waitingFor(new HostPortWaitStrategy())
         container.start()
         container.followOutput(new Slf4jLogConsumer(log))
-        List<Object> config = ["gcp.pubsub.emulator.ui.emulator-host", "http://${container.getHost()}:${container.getMappedPort(8681)}"]
+        PUBSUB_CONTAINER_HOST = "${container.getHost()}:${container.getMappedPort(8681)}"
+    }
+
+    void setupSpec() {
+        List<Object> config = [
+                "pubsub.emulator.host", PUBSUB_CONTAINER_HOST
+        ]
         embeddedServer = ApplicationContext.run(EmbeddedServer,
                 CollectionUtils.mapOf(
                         (config as Object[])
                 )
         )
-        println container.getMappedPort(8681)
         context = embeddedServer.getApplicationContext()
     }
 }

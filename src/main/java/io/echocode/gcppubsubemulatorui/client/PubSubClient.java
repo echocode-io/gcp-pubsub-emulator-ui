@@ -9,7 +9,7 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.client.annotation.Client;
 
-@Client(value = "${gcp.pubsub.emulator.ui.emulator-host}")
+@Client(value = "http://${pubsub.emulator.host}")
 public interface PubSubClient {
 
     @Get(uri = "/v1/projects/{projectId}/topics", produces = MediaType.APPLICATION_JSON)

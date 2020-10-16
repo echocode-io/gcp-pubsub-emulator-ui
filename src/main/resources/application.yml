@@ -17,5 +17,7 @@ gcp:
   pubsub:
     emulator:
       ui:
-        emulator-host: http://${EMULATOR_HOST:`localhost:8681`}
         projects: ${GCP_PROJECT_IDS:company-dev,company-staging}
+pubsub:
+  emulator:
+    host: ${PUBSUB_EMULATOR_HOST:`localhost:8681`}

@@ -3,3 +3,4 @@ gcp:
     emulator:
       ui:
         projects: project1
+  project-id: project1

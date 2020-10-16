@@ -12,6 +12,10 @@ repositories {
     jcenter()
 }
 
+ext {
+    seleniumVersion = '3.141.59'
+    gebVersion = '3.4'
+}
 micronaut {
     runtime "netty"
     testRuntime "spock2"
@@ -38,13 +42,13 @@ dependencies {
     developmentOnly "net.java.dev.jna:jna"
     developmentOnly "io.methvin:directory-watcher"
 
-    testCompile "org.testcontainers:testcontainers:1.15.0-rc2"
-    testImplementation "org.gebish:geb-spock:3.4"
-    testImplementation "org.seleniumhq.selenium:htmlunit-driver:2.35.1"
+    testImplementation("io.micronaut.gcp:micronaut-gcp-pubsub")
+    testImplementation "org.testcontainers:testcontainers:1.15.0-rc2"
+    testImplementation "org.gebish:geb-spock:${gebVersion}"
     testRuntime 'net.sourceforge.htmlunit:htmlunit:2.35.0'
-    testImplementation "org.seleniumhq.selenium:selenium-support:3.141.59"
-    testImplementation "org.seleniumhq.selenium:selenium-api:3.141.59"
-
+    testImplementation "org.seleniumhq.selenium:htmlunit-driver:2.35.1"
+    testImplementation "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
+    testImplementation "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
 }
 
 mainClassName = "io.echocode.gcppubsubemulatorui.Application"

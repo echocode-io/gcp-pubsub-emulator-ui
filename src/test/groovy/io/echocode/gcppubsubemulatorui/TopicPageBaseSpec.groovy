@@ -2,6 +2,7 @@ package io.echocode.gcppubsubemulatorui
 
 import io.echocode.gcppubsubemulatorui.page.TopicPage
 import spock.lang.Stepwise
+import spock.util.concurrent.PollingConditions
 
 @Stepwise
 class TopicPageBaseSpec extends PubSubBaseSpec {
@@ -29,12 +30,17 @@ class TopicPageBaseSpec extends PubSubBaseSpec {
     void 'publish a message to topic'() {
         given:
         TopicPage topicPage = browser.page TopicPage
+        String message = """{"test": "hi"}"""
+        PollingConditions conditions = new PollingConditions(timeout: 3)
 
         when:
-        topicPage.publishMessageArea.text = """{"test": "hi"}"""
+        topicPage.publishMessageArea.text = message
         topicPage.publishButton.click()
 
         then:
-        topicPage.publishMessageArea.text == ""
+        conditions.eventually {
+            pubSubTestListener.receivedMessages.size() == 1
+            pubSubTestListener.receivedMessages[0] == message
+        }
     }
 }
