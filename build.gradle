@@ -55,5 +55,6 @@ java {
 
 run.classpath += configurations.developmentOnly
 
-
-
+dockerBuild {
+    images = ["echocode/gcp-pubsub-emulator-ui:$project.version"]
+}
