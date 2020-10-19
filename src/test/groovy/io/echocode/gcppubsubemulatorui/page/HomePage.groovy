@@ -12,5 +12,6 @@ class HomePage extends Page {
 
     static content = {
         topics { $('.topic') }
+        subscriptions { $('.subscription') }
     }
 }

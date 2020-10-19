@@ -23,6 +23,7 @@ class HomePageBaseSpec extends PubSubBaseSpec {
         then:
         homePage.topics.size() == 1
         homePage.topics[0].text() == 'topic1'
+        homePage.subscriptions[0].text() == 'subscription1'
     }
 
     void 'can navigate to topic'() {

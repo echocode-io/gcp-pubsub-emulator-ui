@@ -9,14 +9,19 @@
         <p>No projects configured</p>
     </div>
     <div th:if="${projectTopics != null}">
-        <h3>Topics</h3>
         <ul>
             <li class="project" th:each="project : ${projectTopics}">
-                <span th:text="${project.key}"></span>
+                Project: <strong th:text="${project.key}"></strong>
                 <ul>
                     <li class="no-topics" th:if="${project.value.empty}">No topics configured</li>
                     <li th:each="topic : ${project.value}">
-                        <a class="topic" th:href="@{'/project/' + ${project.key} + '/topic/' + ${topic.topicNameStripped}}" th:text="${topic.topicNameStripped}">Topic Name</a>
+                        Topic: <a class="topic" th:href="@{'/project/' + ${project.key} + '/topic/' + ${topic.topicNameStripped}}" th:text="${topic.topicNameStripped}">Topic Name</a>
+                        <ul>
+                            <li class="no-subscriptions" th:if="${project.value.empty}">No subscriptions configured</li>
+                            <li th:each="subscription : ${topic.subscriptions}">
+                                Subscription: <span class="subscription" th:text="${subscription.subscriptionNameStripped}">Subscription Name</span>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
