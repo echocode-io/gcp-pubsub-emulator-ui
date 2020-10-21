@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${project} +'/' + ${topic} + '/' + ${subscription}"></title>
+</head>
+<body>
+<section>
+    <h3 class="subscription" th:text="'Subscription: ' + ${project} + '/' + ${topic} + '/' + ${subscription}">
+        Subscription</h3>
+
+    <form class="pull-message-form" action="#"
+          th:action="@{'/project/'+${project}+'/topic/'+${topic}+'/subscription/'+${subscription}}"
+          th:object="${message}"
+          method="post">
+        <button type="submit" class="btn btn-outline-primary publish">Pull message</button>
+    </form>
+
+    <p th:if="${!messages.empty}" class="lead">Subscription messages:</p>
+    <ul>
+        <li class="received-message" th:each="receivedMessage : ${messages}">
+            <strong th:text="${receivedMessage.message.data}">Message</strong>
+        </li>
+    </ul>
+</section>
+</body>
+</html>

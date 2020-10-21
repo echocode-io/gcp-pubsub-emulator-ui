@@ -1,4 +1,4 @@
-package io.echocode.gcppubsubemulatorui.model;
+package io.echocode.gcppubsubemulatorui.model.topic.response;
 
 import lombok.*;
 
