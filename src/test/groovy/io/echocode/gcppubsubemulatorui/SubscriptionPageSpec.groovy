@@ -2,12 +2,11 @@ package io.echocode.gcppubsubemulatorui
 
 import io.echocode.gcppubsubemulatorui.page.TopicPage
 import spock.lang.Stepwise
-import spock.util.concurrent.PollingConditions
 
 @Stepwise
-class TopicPageBaseSpec extends PubSubBaseSpec {
+class SubscriptionPageSpec extends PubSubBaseSpec {
 
-    void 'view topic page'() {
+    void 'view subscription page'() {
         given:
         browser.baseUrl = "http://${embeddedServer.host}:${embeddedServer.port}"
 
@@ -25,22 +24,5 @@ class TopicPageBaseSpec extends PubSubBaseSpec {
         topicPage.topics[0].text() == 'Topic: project1/topic1'
         topicPage.leads[0].text() == 'Publish a message'
         topicPage.publishMessageForm.displayed
-    }
-
-    void 'publish a message to topic'() {
-        given:
-        TopicPage topicPage = browser.page TopicPage
-        String message = """{"test": "hi"}"""
-        PollingConditions conditions = new PollingConditions(timeout: 3)
-
-        when:
-        topicPage.publishMessageArea.text = message
-        topicPage.publishButton.click()
-
-        then:
-        conditions.eventually {
-            pubSubTestListener.receivedMessages.size() == 1
-            pubSubTestListener.receivedMessages[0] == message
-        }
     }
 }
