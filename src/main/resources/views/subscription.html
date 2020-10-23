@@ -12,12 +12,12 @@
           th:action="@{'/project/'+${project}+'/topic/'+${topic}+'/subscription/'+${subscription}}"
           th:object="${message}"
           method="post">
-        <button type="submit" class="btn btn-outline-primary publish">Pull message</button>
+        <button type="submit" class="btn btn-outline-primary pull-message">Pull message</button>
     </form>
 
     <p th:if="${!messages.empty}" class="lead">Subscription messages:</p>
     <ul>
-        <li class="received-message" th:each="receivedMessage : ${messages}">
+        <li class="pulled-message" th:each="receivedMessage : ${messages}">
             <strong th:text="${receivedMessage.message.data}">Message</strong>
         </li>
     </ul>
