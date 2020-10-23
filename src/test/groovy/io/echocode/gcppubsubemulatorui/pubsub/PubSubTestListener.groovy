@@ -1,4 +1,4 @@
-package io.echocode.gcppubsubemulatorui.listener
+package io.echocode.gcppubsubemulatorui.pubsub
 
 import io.micronaut.gcp.pubsub.annotation.PubSubListener
 import io.micronaut.gcp.pubsub.annotation.Subscription;

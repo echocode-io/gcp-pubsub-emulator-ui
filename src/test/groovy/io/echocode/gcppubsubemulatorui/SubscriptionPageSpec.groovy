@@ -12,10 +12,10 @@ class SubscriptionPageSpec extends PubSubBaseSpec {
         browser.baseUrl = "http://${embeddedServer.host}:${embeddedServer.port}"
 
         when:
-        to SubscriptionPage, new SubscriptionPage.ProjectTopicSubscriptionParams(project: "project1", topic: "topic1", subscription: "subscription2")
+        to SubscriptionPage, new SubscriptionPage.ProjectTopicSubscriptionParams(project: "project1", topic: "topic2", subscription: "subscription2")
 
         then:
-        at SubscriptionPage, { title == "project1/topic1/subscription2" }
+        at SubscriptionPage, { title == "project1/topic2/subscription2" }
 
         when:
         SubscriptionPage subscriptionPage = browser.page SubscriptionPage
