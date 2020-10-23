@@ -1,9 +1,11 @@
 package io.echocode.gcppubsubemulatorui.client;
 
-import io.echocode.gcppubsubemulatorui.model.MessagePayload;
-import io.echocode.gcppubsubemulatorui.model.PublishResponse;
-import io.echocode.gcppubsubemulatorui.model.SubscriptionsResponse;
-import io.echocode.gcppubsubemulatorui.model.TopicsResponse;
+import io.echocode.gcppubsubemulatorui.model.project.SubscriptionsResponse;
+import io.echocode.gcppubsubemulatorui.model.project.TopicsResponse;
+import io.echocode.gcppubsubemulatorui.model.subscription.request.PullSubscriptionRequest;
+import io.echocode.gcppubsubemulatorui.model.subscription.response.PullSubscriptionResponse;
+import io.echocode.gcppubsubemulatorui.model.topic.request.PublishMessageRequest;
+import io.echocode.gcppubsubemulatorui.model.topic.response.PublishResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Get;
@@ -20,5 +22,8 @@ public interface PubSubClient {
     SubscriptionsResponse listSubscriptions(String projectId);
 
     @Post(uri = "/v1/projects/{projectId}/topics/{topic}:publish", produces = MediaType.APPLICATION_JSON)
-    PublishResponse publishMessage(String projectId, String topic, @Body MessagePayload message);
+    PublishResponse publishMessage(String projectId, String topic, @Body PublishMessageRequest message);
+
+    @Post(uri = "/v1/projects/{projectId}/subscriptions/{subscription}:pull", produces = MediaType.APPLICATION_JSON)
+    PullSubscriptionResponse pullMessages(String projectId, String subscription, @Body PullSubscriptionRequest message);
 }

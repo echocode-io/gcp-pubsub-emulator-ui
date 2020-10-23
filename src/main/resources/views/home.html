@@ -19,7 +19,7 @@
                         <ul>
                             <li class="no-subscriptions" th:if="${project.value.empty}">No subscriptions configured</li>
                             <li th:each="subscription : ${topic.subscriptions}">
-                                Subscription: <span class="subscription" th:text="${subscription.subscriptionNameStripped}">Subscription Name</span>
+                                Subscription: <a class="subscription" th:href="@{'/project/' + ${project.key} + '/topic/' + ${topic.topicNameStripped} + '/subscription/' + ${subscription.subscriptionNameStripped}}" th:text="${subscription.subscriptionNameStripped}">Subscription Name</a>
                             </li>
                         </ul>
                     </li>

@@ -2,7 +2,14 @@ package io.echocode.gcppubsubemulatorui.service;
 
 
 import io.echocode.gcppubsubemulatorui.client.PubSubClient;
-import io.echocode.gcppubsubemulatorui.model.*;
+import io.echocode.gcppubsubemulatorui.model.project.Subscription;
+import io.echocode.gcppubsubemulatorui.model.project.Topic;
+import io.echocode.gcppubsubemulatorui.model.subscription.request.PullSubscriptionRequest;
+import io.echocode.gcppubsubemulatorui.model.subscription.response.PullSubscriptionResponse;
+import io.echocode.gcppubsubemulatorui.model.subscription.response.SubscriptionReceivedMessage;
+import io.echocode.gcppubsubemulatorui.model.topic.request.PublishMessage;
+import io.echocode.gcppubsubemulatorui.model.topic.request.PublishMessageRequest;
+import io.echocode.gcppubsubemulatorui.model.topic.response.PublishResponse;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.http.client.annotation.Client;
 
@@ -39,6 +46,12 @@ public class PubSubService {
     }
 
     public PublishResponse publishMessage(String project, String topic, String data) {
-        return httpClient.publishMessage(project, topic, new MessagePayload(Collections.singletonList(new Message(data))));
+        return httpClient.publishMessage(project, topic, new PublishMessageRequest(Collections.singletonList(new PublishMessage(data))));
+    }
+
+    public List<SubscriptionReceivedMessage> pullMessages(String project, String subscription) {
+        PullSubscriptionResponse pullSubscriptionResponse = httpClient.pullMessages(project, subscription, new PullSubscriptionRequest(true, 1));
+        return Optional.ofNullable(pullSubscriptionResponse.getReceivedMessages())
+                .orElse(Collections.emptyList());
     }
 }

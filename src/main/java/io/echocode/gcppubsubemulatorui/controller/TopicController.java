@@ -1,6 +1,6 @@
 package io.echocode.gcppubsubemulatorui.controller;
 
-import io.echocode.gcppubsubemulatorui.model.PublishResponse;
+import io.echocode.gcppubsubemulatorui.model.topic.response.PublishResponse;
 import io.echocode.gcppubsubemulatorui.service.PubSubService;
 import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.http.HttpResponse;
