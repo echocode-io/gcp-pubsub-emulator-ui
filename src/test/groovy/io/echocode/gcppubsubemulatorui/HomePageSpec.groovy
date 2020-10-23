@@ -5,7 +5,7 @@ import io.echocode.gcppubsubemulatorui.page.TopicPage
 import spock.lang.Stepwise
 
 @Stepwise
-class HomePageBaseSpec extends PubSubBaseSpec {
+class HomePageSpec extends PubSubBaseSpec {
 
     void 'home page lists topics'() {
         given:
@@ -21,9 +21,11 @@ class HomePageBaseSpec extends PubSubBaseSpec {
         HomePage homePage = browser.page HomePage
 
         then:
-        homePage.topics.size() == 1
+        homePage.topics.size() == 2
         homePage.topics[0].text() == 'topic1'
         homePage.subscriptions[0].text() == 'subscription1'
+        homePage.topics[1].text() == 'topic2'
+        homePage.subscriptions[1].text() == 'subscription2'
     }
 
     void 'can navigate to topic'() {

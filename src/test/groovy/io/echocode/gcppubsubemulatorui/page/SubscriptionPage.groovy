@@ -1,7 +1,6 @@
 package io.echocode.gcppubsubemulatorui.page
 
 import geb.Page
-import geb.module.Textarea
 
 class SubscriptionPage extends Page {
 
@@ -12,19 +11,18 @@ class SubscriptionPage extends Page {
     static at = { title.contains("/") }
 
     static content = {
-        topics { $('.topic') }
-        leads { $('.lead') }
-        publishMessageForm { $('.publish-message-form') }
-        publishMessageArea { $(name: "message").module(Textarea) }
-        publishButton { $(".publish") }
+        subscription { $('.subscription') }
+        pullMessageButton { $('.pull-message') }
+        pulledMessages { $('.pulled-message') }
     }
 
-    String convertToPath(ProjectTopicParams projectTopicParams) {
-        "/${projectTopicParams.project}/topic/${projectTopicParams.topic}"
+    String convertToPath(ProjectTopicSubscriptionParams projectTopicParams) {
+        "/${projectTopicParams.project}/topic/${projectTopicParams.topic}/subscription/${projectTopicParams.subscription}"
     }
 
-    static class ProjectTopicParams {
+    static class ProjectTopicSubscriptionParams {
         String project
         String topic
+        String subscription
     }
 }

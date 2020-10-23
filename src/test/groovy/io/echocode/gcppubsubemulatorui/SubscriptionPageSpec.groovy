@@ -1,28 +1,30 @@
 package io.echocode.gcppubsubemulatorui
 
-import io.echocode.gcppubsubemulatorui.page.TopicPage
-import spock.lang.Stepwise
+import io.echocode.gcppubsubemulatorui.page.SubscriptionPage
+import spock.util.concurrent.PollingConditions
 
-@Stepwise
 class SubscriptionPageSpec extends PubSubBaseSpec {
 
     void 'view subscription page'() {
         given:
+        PollingConditions conditions = new PollingConditions(timeout: 3)
+        pubSubTestPublisher.send("""{"test":"hello"}""".bytes)
         browser.baseUrl = "http://${embeddedServer.host}:${embeddedServer.port}"
 
         when:
-        to TopicPage, new TopicPage.ProjectTopicParams(project: "project1", topic: "topic1")
+        to SubscriptionPage, new SubscriptionPage.ProjectTopicSubscriptionParams(project: "project1", topic: "topic2", subscription: "subscription2")
 
         then:
-        at TopicPage, { title == "project1/topic1" }
+        at SubscriptionPage, { title == "project1/topic2/subscription2" }
 
         when:
-        TopicPage topicPage = browser.page TopicPage
+        SubscriptionPage subscriptionPage = browser.page SubscriptionPage
+        subscriptionPage.pullMessageButton.click();
 
         then:
-        topicPage.topics.size() == 1
-        topicPage.topics[0].text() == 'Topic: project1/topic1'
-        topicPage.leads[0].text() == 'Publish a message'
-        topicPage.publishMessageForm.displayed
+        conditions.eventually {
+            subscriptionPage.pulledMessages.size() == 1
+            subscriptionPage.pulledMessages[0].text() == '{"test":"hello"}'
+        }
     }
 }
