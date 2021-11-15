@@ -10,7 +10,7 @@ A UI console for the Google Cloud Platform PubSub emulator.
 ## Getting started
 
 ```shell script
-docker run -p 8680:8080 --env PUBSUB_EMULATOR_HOST=<emulator-host>:<emulator-port> --env GCP_PROJECT_IDS=<comma-separated-project-ids> gcp-pubsub-emulator-ui:latest
+docker run --rm -p 8680:8680 --env PUBSUB_EMULATOR_HOST=<emulator-host>:<emulator-port> --env GCP_PROJECT_IDS=<comma-separated-project-ids> echocode/gcp-pubsub-emulator-ui:latest
 ```
 
 The UI runs on [http://localhost:8680](localhost:8680) by default.
@@ -18,7 +18,7 @@ The UI runs on [http://localhost:8680](localhost:8680) by default.
 ### Running by pointing at local emulator
 
 ```shell script
-docker run -p 8680:8080 --env PUBSUB_EMULATOR_HOST=host.docker.internal:8681 --env GCP_PROJECT_IDS=company-dev,company-staging gcp-pubsub-emulator-ui:latest
+docker run --rm -p 8680:8680 --env PUBSUB_EMULATOR_HOST=host.docker.internal:8681 --env GCP_PROJECT_IDS=company-dev,company-staging echocode/gcp-pubsub-emulator-ui:latest
 ```
 
 ### Running in an existing docker-compose.yaml
